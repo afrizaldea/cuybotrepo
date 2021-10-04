@@ -16,8 +16,8 @@ welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "
 client = discord.Client()
 
 def get_lirik(lagu):
-  trend_response = requests.post('https://api-song-lyrics.herokuapp.com/search?q=' + lagu)
-  json_data = json.loads(trend_response.text)
+  list_lagu = requests.post('https://api-song-lyrics.herokuapp.com/search?q=' + lagu)
+  json_data = json.loads(list_lagu.text)
   return(json_data)
 
 def get_covid_data(args, params, child):
@@ -51,7 +51,9 @@ async def on_message(message):
     await bot_response(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
 
   if req_msg.startswith('cuy/lirik'):
-    await bot_response('hi => ' + req_msg.split(" ", 1)[1])
+    requested_song = req_msg.split(" ", 1)[1]
+    daftar_lagu = get_lirik(requested_song)
+    await bot_response('berikut daftar lirik lagu yang lu cari cuy:\n' + daftar_lagu['data']['songTitle'])
 
   if req_msg.startswith('cuy/covid'):
     odp = get_covid_data('data','jumlah_odp','')
