@@ -24,7 +24,8 @@ def get_lirik(lagu):
   else:
     for data in lirik:
       liriks = data['songLyrics']
-    return(liriks)
+      result = lirik_detail(liriks)
+    return(result)
 
 def lirik_detail(link):
   lirik = requests.get(link)
