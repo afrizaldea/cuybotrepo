@@ -9,7 +9,7 @@ from liveserver import liveserver
 from datetime import datetime
 locale.setlocale(locale.LC_ALL, '')
 
-today = datetime.today().strftime('%Y-%m-%d')
+today = datetime.today().strftime('%YY-%MM-%DD')
 
 stat = ["cuy/status", "cuy/stat", "cuy/st", "cuy/stats", "cuy/test", "cuy/ping", "cuy/p"]
 welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "cuy/helo"]
