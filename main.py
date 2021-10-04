@@ -30,7 +30,7 @@ def get_lirik(lagu):
 def lirik_detail(link):
   lirik = requests.get(link)
   json_data = json.loads(lirik.text)
-  lirik_asli = json_data['data']
+  lirik_asli = json_data['data']['songLyrics']
   return(lirik_asli)
 
 def get_covid_data(args, params, child):
