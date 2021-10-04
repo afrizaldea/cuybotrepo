@@ -6,8 +6,8 @@ from liveserver import liveserver
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
-welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "cuy/helo"]
 stat = ["cuy/status", "cuy/stat", "cuy/st", "cuy/stats", "cuy/test", "cuy/ping", "cuy/p"]
+welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "cuy/helo"]
 
 client = discord.Client()
 
@@ -35,10 +35,10 @@ async def on_message(message):
   req_msg= message.content
   bot_response = message.channel.send
 
-  if req_msg.startswith(stat):
+  if any(word in req_msg for word in stat):
     await message.channel.send(':partying_face: CuyBot Masih Aktif! :partying_face:')
 
-  if req_msg.startswith(welcome):
+  if any(word in req_msg for word in welcome):
     await message.channel.send(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
 
   if req_msg.startswith('cuy/covid'):
