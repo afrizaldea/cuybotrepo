@@ -17,8 +17,19 @@ client = discord.Client()
 
 def get_lirik(lagu):
   list_lagu = requests.get('https://api-song-lyrics.herokuapp.com/search?q=' + lagu)
-  json_data = json.loads(list_lagu.text)
-  return(json_data)
+  datas = json.loads(list_lagu.text)
+  lirik = datas['data']
+  if len(lirik) > 1:
+    return('liriknya banyak')
+  else:
+    for data in lirik:
+      liriks = data['songLyrics']
+    return(liriks)
+
+def lirik_detail(link):
+  lirik = requests.get(link)
+  json_data = json.loads(lirik.text)
+  # return(json_data)
 
 def get_covid_data(args, params, child):
   response = requests.get('https://data.covid19.go.id/public/api/update.json')
@@ -53,7 +64,8 @@ async def on_message(message):
   if req_msg.startswith('cuy/lirik'):
     requested_song = req_msg.split(" ", 1)[1]
     daftar_lagu = get_lirik(requested_song)
-    await bot_response('berikut daftar lirik lagu yang lu cari cuy:\n' + str(daftar_lagu))
+    # lirik_lagu = lirik_detail(daftar_lagu)
+    await bot_response(daftar_lagu)
 
   if req_msg.startswith('cuy/covid'):
     odp = get_covid_data('data','jumlah_odp','')
