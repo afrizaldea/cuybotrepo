@@ -51,7 +51,7 @@ async def on_message(message):
     await bot_response(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
 
   if req_msg.startswith('cuy/lirik'):
-    await bot_response('hi => ' + " ".join(req_msg.split()[1:-1]))
+    await bot_response('hi => ' + " ".join(req_msg.split(" ", 1)))
 
   if req_msg.startswith('cuy/covid'):
     odp = get_covid_data('data','jumlah_odp','')
