@@ -2,14 +2,35 @@ import discord
 import os
 import requests
 import json
-from liveserver import liveserver
 import locale
+
+from liveserver import liveserver
+from datetime import datetime
 locale.setlocale(locale.LC_ALL, '')
 
-welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "cuy/helo"]
+today = datetime.today().strftime('%YY-%MM-%DD')
+
 stat = ["cuy/status", "cuy/stat", "cuy/st", "cuy/stats", "cuy/test", "cuy/ping", "cuy/p"]
+welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "cuy/helo"]
 
 client = discord.Client()
+
+def get_lirik(lagu):
+  list_lagu = requests.get('https://api-song-lyrics.herokuapp.com/search?q=' + lagu)
+  datas = json.loads(list_lagu.text)
+  lirik = datas['data']
+  if len(lirik) > 1:
+    return('liriknya banyak')
+  else:
+    for data in lirik:
+      liriks = data['songLyrics']
+      result = lirik_detail(liriks)
+    return(result)
+
+def lirik_detail(link):
+  lirik = requests.get(link)
+  json_data = json.loads(lirik.text)
+  # return(json_data)
 
 def get_covid_data(args, params, child):
   response = requests.get('https://data.covid19.go.id/public/api/update.json')
@@ -35,11 +56,17 @@ async def on_message(message):
   req_msg= message.content
   bot_response = message.channel.send
 
-  if req_msg.startswith(stat):
-    await message.channel.send(':partying_face: CuyBot Masih Aktif! :partying_face:')
+  if any(word in req_msg for word in stat):
+    await bot_response(':partying_face: CuyBot Masih Aktif! :partying_face:')
 
-  if req_msg.startswith(welcome):
-    await message.channel.send(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
+  if any(x in req_msg for x in welcome):
+    await bot_response(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
+
+  if req_msg.startswith('cuy/lirik'):
+    requested_song = req_msg.split(" ", 1)[1]
+    daftar_lagu = get_lirik(requested_song)
+    # lirik_lagu = lirik_detail(daftar_lagu)
+    await bot_response(daftar_lagu)
 
   if req_msg.startswith('cuy/covid'):
     odp = get_covid_data('data','jumlah_odp','')
