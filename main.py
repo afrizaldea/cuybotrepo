@@ -15,6 +15,9 @@ welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "
 
 client = discord.Client()
 
+def get_cuaca(param):
+  return 'get ramalan cuaca' + param
+
 def get_lirik(lagu):
   list_lagu = requests.get('https://api-song-lyrics.herokuapp.com/search?q=' + lagu)
   datas = json.loads(list_lagu.text)
@@ -80,6 +83,11 @@ async def on_message(message):
     data_from = 'https://data.covid19.go.id'
 
     await bot_response(':flag_mc: ***DATA COVID*** :flag_mc:\nUPDATE PER: ' + update_per + ' :date:\n' + ':warning: Data Resmi Dari: ' + data_from + ' :warning:\n\n' + 'Total ODP saat ini: **' + f'{odp:,}' + '** orang :thermometer_face:' + "\n" + 'Total spesimen negatif: **' + f'{total_spesimen_negatif:,}' + '** orang :thinking:' + '\n' + 'total positif: **' + f'{total_positif:,}' + '** orang :persevere:' + '\n' + 'Total sembuh: **' + f'{total_sembuh:,}' + '** orang :hugging:' + '\n' + 'Total meninggal: **' + str(total_meninggal) + '** orang :cry:' + '\n\n' + '---TERIMAKASIH CUYBOT--- :laughing:')
+
+  if req_msg.startswith('cuy/cuaca'):
+    print('request => ' + req_msg)
+    data = get_cuaca('hari ini')
+    await bot_response(data)
 
 liveserver()
 client.run(os.getenv('TOKEN'))
