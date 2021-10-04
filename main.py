@@ -23,7 +23,7 @@ def get_lirik(lagu):
   datas = json.loads(list_lagu.text)
   lirik = datas['data']
   if len(lirik) > 1:
-    return('liriknya banyak')
+    return('mohon judul lebih spesifik lagi, terlalu banyak list (fitur masih ongoing cuy).\ncoba cari misalnya cuy/lirik kala cinta menggoda')
   else:
     for data in lirik:
       liriks = data['songLyrics']
