@@ -3,7 +3,6 @@ import os
 import requests
 import json
 import locale
-import logging
 
 from liveserver import liveserver
 from datetime import datetime
@@ -43,8 +42,6 @@ async def on_message(message):
     return
 
   req_msg= message.content
-  logging.info('from request => ' + req_msg)
-
   bot_response = message.channel.send
 
   if any(word in req_msg for word in stat):
@@ -53,8 +50,8 @@ async def on_message(message):
   if any(x in req_msg for x in welcome):
     await bot_response(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
 
-  if req_msg.startswith('cuy/lirik human'):
-    await bot_response(':partying_face: ' + get_lirik())
+  if req_msg.startswith('cuy/abc'):
+    await bot_response('hi => ' + req_msg)
 
   if req_msg.startswith('cuy/covid'):
     odp = get_covid_data('data','jumlah_odp','')
