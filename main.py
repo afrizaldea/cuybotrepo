@@ -30,7 +30,8 @@ def get_lirik(lagu):
 def lirik_detail(link):
   lirik = requests.get(link)
   json_data = json.loads(lirik.text)
-  # return(json_data)
+  lirik_asli = json_data['data']
+  return(lirik_asli)
 
 def get_covid_data(args, params, child):
   response = requests.get('https://data.covid19.go.id/public/api/update.json')
