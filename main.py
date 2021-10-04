@@ -2,14 +2,29 @@ import discord
 import os
 import requests
 import json
-from liveserver import liveserver
+import logging
 import locale
+
+from liveserver import liveserver
+from datetime import datetime
 locale.setlocale(locale.LC_ALL, '')
+
+today = datetime.today().strftime('%Y-%m-%d')
 
 stat = ["cuy/status", "cuy/stat", "cuy/st", "cuy/stats", "cuy/test", "cuy/ping", "cuy/p"]
 welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "cuy/helo"]
 
 client = discord.Client()
+
+def get_trending():
+  obj_trend = {
+    "date": today,
+    "geo": "id"
+  }
+  trend_response = requests.post('https://api-trends.azharimm.tk/trend/daily', obj_trend)
+  json_data = json.loads(trend_response.text)
+  logging.info(json_data)
+  return(json_data)
 
 def get_covid_data(args, params, child):
   response = requests.get('https://data.covid19.go.id/public/api/update.json')
@@ -36,10 +51,13 @@ async def on_message(message):
   bot_response = message.channel.send
 
   if any(word in req_msg for word in stat):
-    await message.channel.send(':partying_face: CuyBot Masih Aktif! :partying_face:')
+    await bot_response(':partying_face: CuyBot Masih Aktif! :partying_face:')
 
   if any(x in req_msg for x in welcome):
-    await message.channel.send(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
+    await bot_response(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
+
+  if req_msg.startswith('cuy/trending'):
+    await bot_response(':partying_face: ' + get_trending())
 
   if req_msg.startswith('cuy/covid'):
     odp = get_covid_data('data','jumlah_odp','')
