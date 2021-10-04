@@ -35,10 +35,10 @@ async def on_message(message):
   req_msg= message.content
   bot_response = message.channel.send
 
-  if any(stat in req_msg):
+  if any(word in req_msg for word in stat):
     await message.channel.send(':partying_face: CuyBot Masih Aktif! :partying_face:')
 
-  if any(welcome in req_msg):
+  if any(x in req_msg for x in welcome):
     await message.channel.send(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
 
   if req_msg.startswith('cuy/covid'):
