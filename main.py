@@ -1,7 +1,7 @@
 import os
 import locale
 
-from liveserver import server
+from liveserver import liveserver
 from constants import c
 from api import api
 
@@ -46,5 +46,5 @@ async def on_message(message):
     data = api.get_cuaca('hari ini')
     await bot_response(data)
 
-server()
+liveserver()
 c.client.run(os.getenv('TOKEN'))
