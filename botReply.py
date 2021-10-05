@@ -38,3 +38,8 @@ class botReply:
             print('request => ' + req_msg)
             data = api.get_cuaca('hari ini')
             await bot_response(data)
+
+        if req_msg.startswith('cuy/quotes'):
+            await bot_response('tunggun sebentar, saya carikan dulu quotes yang menarik untuk kamu')
+            data = api.get_quotes()
+            await bot_response(data)
