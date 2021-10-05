@@ -1,7 +1,7 @@
 import os
 import locale
 
-from liveServer import server
+from liveserver import server
 from constants import c
 from api import api
 
