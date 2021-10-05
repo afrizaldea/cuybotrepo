@@ -16,7 +16,7 @@ welcome = ["cuy/hi", "cuy/helo", "cuy/hello", "cuy/halo", "cuy/hai", "cuy/oy", "
 client = discord.Client()
 
 def get_cuaca(param):
-  return 'get ramalan cuaca' + param
+  return 'get ramalan cuaca 2 2 2 2 test' + param
 
 def get_lirik(lagu):
   list_lagu = requests.get('https://api-song-lyrics.herokuapp.com/search?q=' + lagu)
