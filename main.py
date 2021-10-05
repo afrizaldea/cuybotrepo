@@ -2,8 +2,8 @@ import os
 import locale
 
 from liveserver import liveserver
-from constants import c
-from api import api
+import constants as c
+import api as api
 
 locale.setlocale(locale.LC_ALL, '')
 
