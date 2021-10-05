@@ -17,10 +17,12 @@ class botReply:
             await bot_response(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
 
         if req_msg.startswith('cuy/lirik'):
-            requested_song = req_msg.split(" ", 1)[1]
-            daftar_lagu = api.get_lirik(requested_song)
-            # lirik_lagu = lirik_detail(daftar_lagu)
-            await bot_response(daftar_lagu)
+            if len(req_msg) > 9:
+                requested_song = req_msg.split(" ", 1)[1]
+                daftar_lagu = api.get_lirik(requested_song)
+                await bot_response(daftar_lagu)
+            else:
+                await bot_response('maaf pastikan command nya benar')
 
         if req_msg.startswith('cuy/covid'):
             odp = api.get_covid_data('data', 'jumlah_odp', '')
