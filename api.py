@@ -16,7 +16,7 @@ def get_lirik(lagu):
       result = lirik_detail(liriks)
       return(result)
   else:
-    return 'maaf gw kurang paham cuy, cari lirik lainnya ya. jangan lupa pake command\ncuy/lirik [nama lagu selengkap lengkapnya, kalau bisa nama band nya juga masukin]'
+    return('maaf gw kurang paham cuy, cari lirik lainnya ya. jangan lupa pake command\ncuy/lirik [nama lagu selengkap lengkapnya, kalau bisa nama band nya juga masukin]')
 
 def lirik_detail(link):
   lirik = requests.get(link)
