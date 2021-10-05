@@ -11,7 +11,7 @@ class botReply:
         bot_response = message.channel.send
 
         if any(word in req_msg for word in c.request_stat):
-            await bot_response(':partying_face: CuyBot Masih Aktif! :partying_face:')
+            await bot_response(':partying_face: CuyBot Masih Aktif ULULULULULU! :partying_face:')
 
         if any(x in req_msg for x in c.request_welcome):
             await bot_response(':partying_face: Oy cuy! :partying_face: \n\nperkenalkan cuy gw bot buatannya dea dan tim :yum:\ngw siap bantu ngasih info info sesuatu yang lu butuhin')
