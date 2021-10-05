@@ -22,7 +22,7 @@ class botReply:
                 daftar_lagu = api.get_lirik(requested_song)
                 await bot_response(daftar_lagu)
             else:
-                return bot_response('maaf pastikan command nya benar')
+                await bot_response('maaf pastikan command nya benar')
 
         if req_msg.startswith('cuy/covid'):
             odp = api.get_covid_data('data', 'jumlah_odp', '')
