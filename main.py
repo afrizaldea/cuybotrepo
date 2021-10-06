@@ -16,7 +16,7 @@ async def on_ready():
     print('logged in as {0.user} '.format(c.client))
 
 @c.client.event
-def on_message(message):
+async def on_message(message):
   if message.author == c.client.user:
     return
 
