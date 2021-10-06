@@ -16,18 +16,18 @@ async def on_ready():
     print('logged in as {0.user} '.format(c.client))
 
 @c.client.event
-async def on_message(message):
+def on_message(message):
   if message.author == c.client.user:
     return
 
   user_message = message.content
   bot_send = message.channel.send
 
-  await status(user_message, bot_send)
-  await welcome(user_message, bot_send)
-  await covid(user_message, bot_send)
-  await quote(user_message, bot_send)
-  await cuaca(user_message, bot_send)
+  status(user_message, bot_send)
+  welcome(user_message, bot_send)
+  covid(user_message, bot_send)
+  quote(user_message, bot_send)
+  cuaca(user_message, bot_send)
 
 liveserver()
 c.client.run(os.getenv('TOKEN'))
